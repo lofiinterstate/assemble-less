@@ -238,6 +238,20 @@ Default: none
 
 Write the source map to a separate file with the given filename.
 
+### sourceMapExt
+Type: `String`
+
+Default: none
+
+If specified, sourceMapFilename is overridden and the generated file is placed in the same directory as the source with the sourceMapExt attached.
+
+### sourceMapDestpath
+Type: `String`
+
+Default: none
+
+If specified, sourceMapDestpath will be prepended to all generated source map files.
+
 ### sourceMapURL
 Type: `String`
 

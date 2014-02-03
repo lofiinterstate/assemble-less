@@ -126,9 +126,10 @@ module.exports = function(grunt) {
     if (this.files.length < 1) {
       grunt.verbose.warn('Destination not written because no source files were provided.');
     }
-
+    
     async.forEachSeries(this.files, function(f, nextFileObj) {
       var destFile = f.dest;
+      var srcFile = f.src[0];
 
       var files = f.src.filter(function(filepath) {
         // Warn on and remove invalid source files (if nonull was set).
@@ -147,6 +148,15 @@ module.exports = function(grunt) {
 
         // No src files, goto next target. Warn would have been issued above.
         return nextFileObj();
+      }
+
+      // Dynamically generate source maps if we're expanding files
+      if (options.sourceMapExt) {
+        options.sourceMapFilename = srcFile + options.sourceMapExt;
+      }
+
+      if (options.sourceMapDestpath){
+        options.sourceMapFilename = options.sourceMapDestpath + '/' + options.sourceMapFilename;
       }
 
       var compiledMax = [];
